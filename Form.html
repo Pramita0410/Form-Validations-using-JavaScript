@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Feedback</title>
+	<style>
+		label {
+			float: left;
+			width: 150px;
+		}
+
+		#container {
+			width: 700px;
+			margin: auto;
+			background-color: beige;
+		}
+
+		main {
+			padding: 50px;
+		}
+
+		table,
+		th,
+		td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="container">
+
+		<main>
+			<h2>Feeback</h2>
+			<h3>Love something? Hate something? Let us know!</h3>
+			Note : Fields marked with an asterisk(*) are mandatory
+			<br><br>
+			<form id="feedback_form" method="post" novalidate>
+				<label>Title*:</label>
+				<input type="radio" name="title" id="miss" value="miss" required="required" />Miss
+				<input type="radio" name="title" id="mr" value="mr" required="required" />Mr.
+				<input type="radio" name="title" id="mrs" value="mrs" required="required" />Mrs.
+				<br><br>
+				<label for="firstName">First Name*:</label>
+				<input onkeyup="validateName(event)" type="text" name="firstName" id="firstName"
+					placeholder="First Name" />
+				<p id="errMsgfirstName" style="display:none;color:red; padding:0px">Invalid First Name, enter only text
+				</p>
+				<br><br>
+
+
+				<label for="lastName">Last Name*:</label>
+				<input onkeyup="validateName(event)" type="text" name="lastName" id="lastName"
+					placeholder="Last Name" />
+				<p id="errMsglastName" style="display:none;color:red; padding:0px">Invalid Last Name, enter only text
+				</p>
+
+				<br><br>
+
+
+				<label for="emailId">Email Id*:</label>
+				<input onkeyup="validateEmailPhoneZip(event, 'email')" type="text" name="emailId" id="emailId"
+					placeholder="yourname@domain.com" />
+				<p id="errMsgemailId" style="display:none;color:red; padding:0px">Invalid Email, enter valid email</p>
+				<br><br>
+
+
+				<label for="phoneNumber">Phone Number*:</label>
+				<input onkeyup="validateEmailPhoneZip(event, 'phone')" type="text" name="phoneNumber" id="phoneNumber"
+					placeholder="xxx-xxx-xxxx" />
+				<p id="errMsgphoneNumber" style="display:none;color:red; padding:0px">Invalid Phone Number, enter valid
+					number</p>
+				<br><br>
+
+				<label for="zipcode">ZipCode*:</label>
+				<input onkeyup="validateEmailPhoneZip(event, 'zip')" type="text" name="zipcode" id="zipcode"
+					placeholder="xxxxxx" />
+				<p id="errMsgzipcode" style="display:none;color:red; padding:0px">Invalid ZipCode, enter zipcode</p>
+
+				<br><br>
+
+				<label for="zipcode">How did you hear*:</label>
+				<input type='checkbox' name="source_survey" value="facebook" /> Facebook
+				<input type='checkbox' name="source_survey" value="google" /> Google
+				<input type='checkbox' name="source_survey" value="yelp" /> Yelp
+				<br><br>
+
+				<label for="comments">Comments*:</label>
+				<textarea onkeyup="validateComments(event)" name="text" id="comments" placeholder="Your comments"
+					rows="5" cols="25"></textarea>
+				<p id="errMsgcomments" style="display:none;color:red; padding:0px">Enter non-empty comments</p>
+				<br><br>
+				<label for="drinks">Drinks*:</label>
+				<select name="drinks" id="drinks" onchange="showText()">
+					<option value="default" selected>Select an option</option>
+					<option value="Java chip">Java chip</option>
+					<option value="Ice latte">Ice latte</option>
+					<option value="Strawberry Frappe">Strawberry Frappe</option>
+					<option value="Mocha Cookie">Mocha Cookie</option>
+					<option value="Macchiato">Macchiato</option>
+				</select>
+				<br><br>
+				<div id="selectionBody" class="display:flex; flex-direction:column">
+					<div style="display:none;" id="java">
+						<label for="javaChip" class="selection">Large Java Mint Frppe</label>
+						<input type="checkbox" id="javaChip" name="source" value="Java Chip" class="selection"
+							onchange="showUP(this)"><br>
+					</div>
+					<div style="display:none;" id="ice">
+
+						<label for="iceLatte" class="selection">Caramel Latte</label>
+						<input type="checkbox" id="iceLatte" name="source" value="Ice Latte" class="selection"
+							onchange="showUP(this)"><br>
+
+					</div>
+					<div style="display:none;" id="strawberry">
+						<label for="strawberryFrappe" class="selection">Pink Drink</label>
+						<input type="checkbox" id="strawberryFrappe" name="source" value="Strawberry Frappe"
+							class="selection" onchange="showUP(this)"><br>
+
+					</div>
+
+					<div style="display:none;" id="mocha">
+						<label for="mochaCookie" class="selection">Mocha Cookie Crumble</label>
+						<input type="checkbox" id="mochaCookie" name="source" value="Mocha Cookie" class="selection"
+							onchange="showUP(this)"><br>
+
+					</div>
+					<div style="display:none;" id="macchiato">
+						<label for="macchiato" class="selection">Caramel Macchiato</label>
+						<input type="checkbox" id="macchiato" name="source" value="Macchiato" class="selection"
+							onchange="showUP(this)"><br>
+
+					</div>
+
+
+					<br><br>
+					<div style="display: none;" id="last_comments">
+						<label for="comments" class="selection">Comments on the selected item*:</label>
+						<textarea onkeyup="validateLastComments(event)" id="commentsLast" name="comments"
+							class="selection" placeholder="Your comments about item selected" rows="5"
+							cols="25"></textarea>
+						<p id="errMsgcommentsLast" style="display:none;color:red; padding:0px">Enter non-empty comments
+						</p>
+					</div>
+				</div>
+
+
+				<br><br>
+				<input id="mysubmit" type="Submit" disabled>
+				<input type="Reset">
+				<br><br>
+			</form>
+
+			<div class="final_table">
+				<table id="userTable">
+					<thead>
+						<tr>
+							<th>Full Name</th>
+							<th>Email ID</th>
+							<th>Phone Number</th>
+							<th>ZipCode</th>
+							<th>Source</th>
+							<th>Comments</th>
+							<th>Drinks</th>
+							<th>Drink Comments</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+
+
+		</main>
+	</div>
+	<script src="form_validation.js"></script>
+
+</body>
+
+</html>
